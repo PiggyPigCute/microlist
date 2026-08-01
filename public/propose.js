@@ -46,11 +46,17 @@
   }
 
   function collectLinks() {
-    return [...linksEditor.querySelectorAll('.link-row')].map(row => ({
-      type: row.querySelector('.link-type').value,
-      label: row.querySelector('.link-label').value.trim(),
-      url: row.querySelector('.link-url').value.trim(),
-    })).filter(link => link.url);
+    return [...linksEditor.querySelectorAll('.link-row')]
+      .map(row => {
+        const type = row.querySelector('.link-type').value;
+        const rawUrl = row.querySelector('.link-url').value.trim();
+        return {
+          type,
+          label: row.querySelector('.link-label').value.trim(),
+          url: normalizeLinkUrl(type, rawUrl),
+        };
+      })
+      .filter(link => link.url);
   }
 
   function imagePreview(wrapId, hiddenFieldId, filename, removable) {
@@ -118,6 +124,11 @@
   form.addEventListener('submit', async e => {
     e.preventDefault();
     formMessages.innerHTML = '';
+
+    if (!form.foundingDate.value) {
+      showError('La date de fondation est requise.');
+      return;
+    }
 
     const links = collectLinks();
     if (!links.length) {

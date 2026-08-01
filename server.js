@@ -107,11 +107,15 @@ function parseCookies(req) {
   return cookies;
 }
 
-function setAdminCookie(res) {
+function setAdminCookie(res, req) {
   res.cookie(ADMIN_COOKIE, createAdminToken(), {
     httpOnly: true,
     sameSite: 'lax',
-    secure: true,
+    // req.secure (via "trust proxy" + X-Forwarded-Proto derrière nginx) plutôt que true en dur :
+    // un cookie Secure est silencieusement ignoré par le navigateur tant que le site tourne en
+    // http:// (test local, ou avant que le nginx/TLS ne soit branché) — la connexion échouait
+    // sans aucun message d'erreur
+    secure: req.secure,
     maxAge: SESSION_MAX_AGE_MS,
   });
 }
@@ -148,6 +152,30 @@ function generateProposalId() {
 
 const LINK_TYPES = new Set(['Discord', 'Site web', 'Instagram', 'Twitter/X', 'Facebook', 'Autre']);
 
+// pour ces types, un pseudo seul (ex. "@ernestie" ou "ernestie") est reconstruit en URL de profil
+const HANDLE_BASE_URL = {
+  Instagram: 'https://instagram.com/',
+  'Twitter/X': 'https://x.com/',
+  Facebook: 'https://facebook.com/',
+};
+
+const HAS_SCHEME = /^[a-z][a-z0-9+.-]*:\/\//i;
+
+// tolère "ernestie.fr" (sans protocole) et, pour les réseaux sociaux, "@pseudo" seul
+function normalizeLinkUrl(type, raw) {
+  let value = typeof raw === 'string' ? raw.trim() : '';
+  if (!value) return '';
+
+  const handleBase = HANDLE_BASE_URL[type];
+  if (handleBase && !HAS_SCHEME.test(value) && !value.includes('/')) {
+    const handle = value.replace(/^@/, '');
+    if (handle) return handleBase + handle;
+  }
+
+  if (!HAS_SCHEME.test(value)) value = `https://${value}`;
+  return value;
+}
+
 function isValidUrl(url) {
   try {
     const parsed = new URL(url);
@@ -169,7 +197,7 @@ function parseLinks(raw) {
   for (const link of links) {
     if (!link || typeof link !== 'object') continue;
     const type = typeof link.type === 'string' && LINK_TYPES.has(link.type) ? link.type : 'Autre';
-    const url = typeof link.url === 'string' ? link.url.trim() : '';
+    const url = normalizeLinkUrl(type, link.url);
     if (!isValidUrl(url)) continue;
     const label = type === 'Autre' && typeof link.label === 'string' ? link.label.trim().slice(0, 60) : '';
     cleaned.push(label ? { type, label, url } : { type, url });
@@ -327,7 +355,7 @@ app.post('/api/admin/login', (req, res) => {
   if (!verifyPassword(req.body.password, hash)) {
     return res.status(401).json({ error: 'Mot de passe incorrect.' });
   }
-  setAdminCookie(res);
+  setAdminCookie(res, req);
   res.json({ ok: true });
 });
 
