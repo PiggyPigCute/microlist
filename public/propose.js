@@ -28,7 +28,7 @@
       <div class="link-row">
         <select class="link-type">${options}</select>
         <input type="text" class="link-label" placeholder="Nom du lien" value="${escapeHtml(label)}" style="${type === 'Autre' ? '' : 'display:none'}">
-        <input type="url" class="link-url" placeholder="https://..." value="${escapeHtml(url)}">
+        <input type="text" class="link-url" placeholder="ernestie.fr, @pseudo, https://..." value="${escapeHtml(url)}">
         <button type="button" class="btn btn-secondary btn-small link-remove">✕</button>
       </div>
     `;

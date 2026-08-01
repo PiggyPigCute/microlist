@@ -382,7 +382,7 @@ h1, h2, h3 {
   flex: 0 0 140px;
 }
 
-.link-row input[type="url"] {
+.link-row input.link-url {
   flex: 1 1 200px;
 }
 
