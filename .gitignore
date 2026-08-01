@@ -1,0 +1,7 @@
+node_modules/
+data/entries.json
+data/proposals.json
+data/admin-password.json
+data/session-secret
+uploads/*
+!uploads/.gitkeep

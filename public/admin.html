@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Microlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader"></header>
+
+<main class="container">
+  <div class="proposal-head">
+    <h1 class="page-title">Administration</h1>
+    <button type="button" class="btn btn-secondary" id="logoutBtn">Se déconnecter</button>
+  </div>
+
+  <section>
+    <h2>Propositions en attente</h2>
+    <div id="proposalsList"></div>
+    <p id="noProposals" class="empty-state" hidden>Aucune proposition en attente.</p>
+  </section>
+
+  <section class="admin-section">
+    <div class="proposal-head">
+      <h2>Toutes les entrées</h2>
+      <a class="btn btn-primary" href="/propose?admin=1">+ Ajouter une entrée</a>
+    </div>
+    <table class="admin-entries-table">
+      <thead>
+        <tr><th></th><th>Nom</th><th>Description</th><th></th></tr>
+      </thead>
+      <tbody id="entriesTableBody"></tbody>
+    </table>
+  </section>
+</main>
+
+<script src="app.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

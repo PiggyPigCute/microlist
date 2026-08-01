@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposer une entrée — Microlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader"></header>
+
+<main class="container">
+  <h1 class="page-title" id="formTitle">Proposer une entrée</h1>
+  <p class="page-subtitle" id="formSubtitle"></p>
+
+  <div id="formMessages"></div>
+
+  <form id="entryForm" class="form" enctype="multipart/form-data">
+    <input type="hidden" id="targetId" name="targetId" value="">
+    <input type="hidden" id="existingFlag" name="existingFlag" value="">
+    <input type="hidden" id="existingCoatOfArms" name="existingCoatOfArms" value="">
+
+    <div class="honeypot-field" aria-hidden="true">
+      <label for="website">Ne pas remplir ce champ</label>
+      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label for="shortName">Nom court *</label>
+      <input type="text" id="shortName" name="shortName" placeholder="Ernestie" required maxlength="100">
+    </div>
+
+    <div class="field">
+      <label for="longName">Nom long</label>
+      <input type="text" id="longName" name="longName" placeholder="Démocratie Ernestienne Normalienne Supercoole" maxlength="200">
+    </div>
+
+    <div class="field">
+      <label for="flagFile">Drapeau (image) *</label>
+      <div id="currentFlagPreviewWrap"></div>
+      <input type="file" id="flagFile" name="flag" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml">
+      <p class="field-hint">PNG, JPG, WEBP, GIF ou SVG, 5 Mo max.</p>
+    </div>
+
+    <div class="field">
+      <label for="coatOfArmsFile">Armoiries (image, facultatif)</label>
+      <div id="currentCoatPreviewWrap"></div>
+      <input type="file" id="coatOfArmsFile" name="coatOfArms" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml">
+    </div>
+
+    <div class="field">
+      <label for="shortDescription">Description courte *</label>
+      <input type="text" id="shortDescription" name="shortDescription" placeholder="Démocratie fondée autour de l'École Normale Supérieure" required maxlength="300">
+    </div>
+
+    <div class="field">
+      <label for="longDescription">Description longue</label>
+      <textarea id="longDescription" name="longDescription" placeholder="Description..." maxlength="5000"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="foundingDate">Date de fondation *</label>
+      <input type="date" id="foundingDate" name="foundingDate" required>
+    </div>
+
+    <div class="field">
+      <label>Liens * (au moins un)</label>
+      <div id="linksEditor" class="links-editor"></div>
+      <button type="button" id="addLinkBtn" class="btn btn-secondary btn-small">+ Ajouter un lien</button>
+    </div>
+
+    <div class="field" id="proposerContactField">
+      <label for="proposerContact">Pseudo / contact (facultatif)</label>
+      <input type="text" id="proposerContact" name="proposerContact" placeholder="Pour que l'admin puisse vous recontacter" maxlength="200">
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" id="submitBtn">Envoyer</button>
+      <a href="/" class="btn btn-secondary">Annuler</a>
+    </div>
+  </form>
+</main>
+
+<script src="app.js"></script>
+<script src="propose.js"></script>
+</body>
+</html>

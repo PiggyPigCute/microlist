@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microlist — Annuaire des micronations</title>
+<meta name="description" content="Annuaire coopératif des micronations">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader"></header>
+
+<main class="container">
+  <h1 class="page-title">Microlist</h1>
+  <p class="page-subtitle">L'annuaire coopératif des micronations. Tout le monde peut proposer une entrée.</p>
+
+  <input type="text" id="searchInput" class="search-bar" placeholder="Rechercher une micronation...">
+
+  <div id="entriesGrid" class="entries-grid" aria-live="polite"></div>
+  <p id="emptyState" class="empty-state" hidden>Aucune micronation ne correspond à cette recherche.</p>
+</main>
+
+<script src="app.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
