@@ -21,7 +21,7 @@
         <div class="entry-titles">
           <h1 class="page-title">${escapeHtml(entry.shortName)}</h1>
           ${entry.longName ? `<p class="entry-long-name">${escapeHtml(entry.longName)}</p>` : ''}
-          <p class="entry-founding">Fondée le ${formatDate(entry.foundingDate)}</p>
+          ${entry.foundingDate ? `<p class="entry-founding">Fondée le ${escapeHtml(entry.foundingDate)}</p>` : ''}
         </div>
       </div>
 

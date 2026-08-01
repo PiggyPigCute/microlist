@@ -21,9 +21,6 @@
     if (field === 'links') {
       return (value || []).map(l => `${escapeHtml(linkLabel(l))} : ${escapeHtml(l.url)}`).join('<br>') || '<em>aucun</em>';
     }
-    if (field === 'foundingDate') {
-      return value ? formatDate(value) : '<em>—</em>';
-    }
     return value ? escapeHtml(value) : '<em>—</em>';
   }
 

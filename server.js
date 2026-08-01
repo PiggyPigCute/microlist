@@ -205,10 +205,6 @@ function parseLinks(raw) {
   return cleaned.length ? cleaned : null;
 }
 
-function isValidDate(str) {
-  return typeof str === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(str) && !Number.isNaN(new Date(str).getTime());
-}
-
 // construit et valide les champs d'une entrée à partir d'un formulaire (proposition ou édition admin) ;
 // existingFlag/existingCoatOfArms sont envoyés par le client en mode édition pour conserver l'image
 // actuelle quand aucun nouveau fichier n'est choisi
@@ -225,8 +221,8 @@ function buildEntryData(body, files) {
 
   const longDescription = (body.longDescription || '').trim().slice(0, 5000) || null;
 
-  const foundingDate = (body.foundingDate || '').trim();
-  if (!isValidDate(foundingDate)) errors.push('La date de fondation est invalide.');
+  // texte libre et facultatif : "6 octobre 2025", "2025", une datation fictive...
+  const foundingDate = (body.foundingDate || '').trim().slice(0, 100) || null;
 
   const links = parseLinks(body.links || '[]');
   if (!links) errors.push('Au moins un lien valide (Discord, site web...) est requis.');

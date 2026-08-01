@@ -125,11 +125,6 @@
     e.preventDefault();
     formMessages.innerHTML = '';
 
-    if (!form.foundingDate.value) {
-      showError('La date de fondation est requise.');
-      return;
-    }
-
     const links = collectLinks();
     if (!links.length) {
       showError('Ajoutez au moins un lien valide (Discord, site web...).');

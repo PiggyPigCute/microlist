@@ -6,12 +6,6 @@ function escapeHtml(str) {
   }[c]));
 }
 
-function formatDate(str) {
-  if (!str) return '';
-  const [y, m, d] = str.split('-').map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
-}
-
 function linkLabel(link) {
   return link.type === 'Autre' && link.label ? link.label : link.type;
 }
