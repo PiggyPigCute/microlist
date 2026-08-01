@@ -205,10 +205,48 @@ function parseLinks(raw) {
   return cleaned.length ? cleaned : null;
 }
 
+const MICROCODE_RE = /^[A-Z]{2,5}$/;
+
+function isMicrocodeTaken(code, excludeEntryId) {
+  return entries.some(e => e.id !== excludeEntryId && e.microcode === code);
+}
+
+function parseLanguages(raw) {
+  return (raw || '')
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean)
+    .slice(0, 10)
+    .map(s => s.slice(0, 40));
+}
+
+// [{ id, name }] : id renseigné seulement s'il correspond à une entrée existante du site
+// (sinon simple texte libre, pour les micronations pas encore référencées)
+function parseRecognized(raw) {
+  let items;
+  try {
+    items = JSON.parse(raw);
+  } catch {
+    return [];
+  }
+  if (!Array.isArray(items)) return [];
+  const cleaned = [];
+  for (const item of items) {
+    if (!item || typeof item !== 'object') continue;
+    const name = typeof item.name === 'string' ? item.name.trim().slice(0, 100) : '';
+    if (!name) continue;
+    const id = typeof item.id === 'string' && entries.some(e => e.id === item.id) ? item.id : null;
+    cleaned.push(id ? { id, name } : { name });
+    if (cleaned.length >= 30) break;
+  }
+  return cleaned;
+}
+
 // construit et valide les champs d'une entrée à partir d'un formulaire (proposition ou édition admin) ;
 // existingFlag/existingCoatOfArms sont envoyés par le client en mode édition pour conserver l'image
-// actuelle quand aucun nouveau fichier n'est choisi
-function buildEntryData(body, files) {
+// actuelle quand aucun nouveau fichier n'est choisi ; excludeEntryId exclut l'entrée éditée de la
+// vérification d'unicité du microcode (sinon une entrée entrerait toujours en conflit avec elle-même)
+function buildEntryData(body, files, excludeEntryId) {
   const errors = [];
 
   const shortName = (body.shortName || '').trim().slice(0, 100);
@@ -223,6 +261,21 @@ function buildEntryData(body, files) {
 
   // texte libre et facultatif : "6 octobre 2025", "2025", une datation fictive...
   const foundingDate = (body.foundingDate || '').trim().slice(0, 100) || null;
+
+  const microcodeRaw = (body.microcode || '').trim().toUpperCase();
+  let microcode = null;
+  if (microcodeRaw) {
+    if (!MICROCODE_RE.test(microcodeRaw)) {
+      errors.push('Le microcode doit être composé de 2 à 5 lettres.');
+    } else if (isMicrocodeTaken(microcodeRaw, excludeEntryId)) {
+      errors.push(`Le microcode "${microcodeRaw}" est déjà utilisé par une autre entrée.`);
+    } else {
+      microcode = microcodeRaw;
+    }
+  }
+
+  const officialLanguages = parseLanguages(body.officialLanguages);
+  const recognizedMicronations = parseRecognized(body.recognizedMicronations || '[]');
 
   const links = parseLinks(body.links || '[]');
   if (!links) errors.push('Au moins un lien valide (Discord, site web...) est requis.');
@@ -239,6 +292,7 @@ function buildEntryData(body, files) {
     errors,
     data: {
       shortName, longName, shortDescription, longDescription, foundingDate,
+      microcode, officialLanguages, recognizedMicronations,
       links: links || [], flag, coatOfArms,
     },
     newFlagUploaded: Boolean(flagFile),
@@ -320,7 +374,7 @@ app.post('/api/proposals', uploadEntryImages, (req, res) => {
     return res.status(404).json({ error: 'Entrée à modifier introuvable.' });
   }
 
-  const { errors, data, newFlagUploaded, newCoatOfArmsUploaded } = buildEntryData(req.body, files);
+  const { errors, data, newFlagUploaded, newCoatOfArmsUploaded } = buildEntryData(req.body, files, targetId);
   if (errors.length) {
     cleanupFiles(files);
     return res.status(400).json({ errors });
@@ -380,6 +434,12 @@ app.post('/api/admin/proposals/:id/accept', requireAdmin, (req, res) => {
   const proposal = proposals[idx];
   const now = new Date().toISOString();
 
+  // deux propositions en attente peuvent viser le même microcode : on revérifie au moment
+  // d'accepter plutôt qu'à la seule soumission, sinon la 2e acceptée créerait un doublon
+  if (proposal.data.microcode && isMicrocodeTaken(proposal.data.microcode, proposal.type === 'edit' ? proposal.targetId : null)) {
+    return res.status(409).json({ error: `Le microcode "${proposal.data.microcode}" est déjà utilisé par une autre entrée.` });
+  }
+
   if (proposal.type === 'create') {
     entries.push({ id: generateEntryId(proposal.data.shortName), ...proposal.data, createdAt: now, updatedAt: now });
   } else {
@@ -418,7 +478,7 @@ app.post('/api/admin/proposals/:id/reject', requireAdmin, (req, res) => {
 
 app.post('/api/admin/entries', requireAdmin, uploadEntryImages, (req, res) => {
   const files = req.files || {};
-  const { errors, data } = buildEntryData(req.body, files);
+  const { errors, data } = buildEntryData(req.body, files, null);
   if (errors.length) {
     cleanupFiles(files);
     return res.status(400).json({ errors });
@@ -437,7 +497,7 @@ app.put('/api/admin/entries/:id', requireAdmin, uploadEntryImages, (req, res) =>
     cleanupFiles(files);
     return res.status(404).json({ error: 'Entrée introuvable.' });
   }
-  const { errors, data } = buildEntryData(req.body, files);
+  const { errors, data } = buildEntryData(req.body, files, entry.id);
   if (errors.length) {
     cleanupFiles(files);
     return res.status(400).json({ errors });

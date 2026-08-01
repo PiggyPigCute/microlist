@@ -9,10 +9,15 @@
     shortDescription: 'Description courte',
     longDescription: 'Description longue',
     foundingDate: 'Date de fondation',
+    microcode: 'Microcode',
+    officialLanguages: 'Langues officielles',
     flag: 'Drapeau',
     coatOfArms: 'Armoiries',
     links: 'Liens',
+    recognizedMicronations: 'Micronations reconnues',
   };
+
+  const ARRAY_FIELDS = new Set(['links', 'officialLanguages', 'recognizedMicronations']);
 
   function fieldValueHtml(field, value) {
     if (field === 'flag' || field === 'coatOfArms') {
@@ -21,11 +26,17 @@
     if (field === 'links') {
       return (value || []).map(l => `${escapeHtml(linkLabel(l))} : ${escapeHtml(l.url)}`).join('<br>') || '<em>aucun</em>';
     }
+    if (field === 'officialLanguages') {
+      return (value || []).map(escapeHtml).join(', ') || '<em>aucune</em>';
+    }
+    if (field === 'recognizedMicronations') {
+      return (value || []).map(m => escapeHtml(m.name) + (m.id ? ' (site)' : '')).join(', ') || '<em>aucune</em>';
+    }
     return value ? escapeHtml(value) : '<em>—</em>';
   }
 
   function valuesEqual(field, a, b) {
-    if (field === 'links') return JSON.stringify(a || []) === JSON.stringify(b || []);
+    if (ARRAY_FIELDS.has(field)) return JSON.stringify(a || []) === JSON.stringify(b || []);
     return (a || null) === (b || null);
   }
 

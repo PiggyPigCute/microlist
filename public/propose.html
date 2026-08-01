@@ -68,9 +68,31 @@
     </div>
 
     <div class="field">
+      <label for="microcode">Microcode</label>
+      <input type="text" id="microcode" name="microcode" placeholder="ERN" maxlength="5">
+      <p class="field-hint">2 à 5 lettres, converties automatiquement en majuscules, unique parmi toutes les entrées.</p>
+    </div>
+
+    <div class="field">
+      <label for="officialLanguages">Langues officielles</label>
+      <input type="text" id="officialLanguages" name="officialLanguages" placeholder="Ernestien, Français">
+      <p class="field-hint">Séparées par des virgules.</p>
+    </div>
+
+    <div class="field">
       <label>Liens * (au moins un)</label>
       <div id="linksEditor" class="links-editor"></div>
       <button type="button" id="addLinkBtn" class="btn btn-secondary btn-small">+ Ajouter un lien</button>
+    </div>
+
+    <div class="field">
+      <label for="recognizedInput">Micronations reconnues</label>
+      <div id="recognizedChips" class="chip-list"></div>
+      <div class="autocomplete-wrap">
+        <input type="text" id="recognizedInput" placeholder="Tapez un nom, choisissez une suggestion ou ajoutez-le tel quel" autocomplete="off">
+        <div id="recognizedSuggestions" class="autocomplete-suggestions" hidden></div>
+      </div>
+      <p class="field-hint">Cliquez une suggestion pour lier une entrée du site, ou appuyez sur Entrée pour ajouter un nom libre.</p>
     </div>
 
     <div class="field" id="proposerContactField">
