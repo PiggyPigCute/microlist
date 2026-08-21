@@ -308,6 +308,21 @@ h1, h2, h3 {
   max-width: 640px;
 }
 
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  border: 2px solid var(--violet-bright);
+  border-radius: .75rem;
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+
+.form-section-title {
+  font-size: 1.2rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid var(--violet-bright);
+}
+
 .field {
   display: flex;
   flex-direction: column;

@@ -29,75 +29,83 @@
       <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
     </div>
 
-    <div class="field">
-      <label for="shortName">Nom court *</label>
-      <input type="text" id="shortName" name="shortName" placeholder="Ernestie" required maxlength="100">
-    </div>
+    <div class="form-section">
+      <h2 class="form-section-title">Informations obligatoires</h2>
 
-    <div class="field">
-      <label for="longName">Nom long</label>
-      <input type="text" id="longName" name="longName" placeholder="Démocratie Ernestienne Normalienne Supercoole" maxlength="200">
-    </div>
-
-    <div class="field">
-      <label for="flagFile">Drapeau (image) *</label>
-      <div id="currentFlagPreviewWrap"></div>
-      <input type="file" id="flagFile" name="flag" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml">
-      <p class="field-hint">PNG, JPG, WEBP, GIF ou SVG, 5 Mo max.</p>
-    </div>
-
-    <div class="field">
-      <label for="coatOfArmsFile">Armoiries (image, facultatif)</label>
-      <div id="currentCoatPreviewWrap"></div>
-      <input type="file" id="coatOfArmsFile" name="coatOfArms" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml">
-    </div>
-
-    <div class="field">
-      <label for="shortDescription">Description courte *</label>
-      <input type="text" id="shortDescription" name="shortDescription" placeholder="Démocratie fondée autour de l'École Normale Supérieure" required maxlength="300">
-    </div>
-
-    <div class="field">
-      <label for="longDescription">Description longue</label>
-      <textarea id="longDescription" name="longDescription" placeholder="Description..." maxlength="5000"></textarea>
-    </div>
-
-    <div class="field">
-      <label for="foundingDate">Date de fondation</label>
-      <input type="text" id="foundingDate" name="foundingDate" placeholder="6 octobre 2025, 2025, ou une datation fictive..." maxlength="100">
-    </div>
-
-    <div class="field">
-      <label for="microcode">Microcode</label>
-      <input type="text" id="microcode" name="microcode" placeholder="ERN" maxlength="5">
-      <p class="field-hint">2 à 5 lettres, converties automatiquement en majuscules, unique parmi toutes les entrées.</p>
-    </div>
-
-    <div class="field">
-      <label for="officialLanguages">Langues officielles</label>
-      <input type="text" id="officialLanguages" name="officialLanguages" placeholder="Ernestien, Français">
-      <p class="field-hint">Séparées par des virgules.</p>
-    </div>
-
-    <div class="field">
-      <label>Liens * (au moins un)</label>
-      <div id="linksEditor" class="links-editor"></div>
-      <button type="button" id="addLinkBtn" class="btn btn-secondary btn-small">+ Ajouter un lien</button>
-    </div>
-
-    <div class="field">
-      <label for="recognizedInput">Micronations reconnues</label>
-      <div id="recognizedChips" class="chip-list"></div>
-      <div class="autocomplete-wrap">
-        <input type="text" id="recognizedInput" placeholder="Tapez un nom, choisissez une suggestion ou ajoutez-le tel quel" autocomplete="off">
-        <div id="recognizedSuggestions" class="autocomplete-suggestions" hidden></div>
+      <div class="field">
+        <label for="shortName">Nom court *</label>
+        <input type="text" id="shortName" name="shortName" placeholder="Ernestie" required maxlength="100">
       </div>
-      <p class="field-hint">Cliquez une suggestion pour lier une entrée du site, ou appuyez sur Entrée pour ajouter un nom libre.</p>
+
+      <div class="field">
+        <label for="flagFile">Drapeau (image) *</label>
+        <div id="currentFlagPreviewWrap"></div>
+        <input type="file" id="flagFile" name="flag" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml">
+        <p class="field-hint">PNG, JPG, WEBP, GIF ou SVG, 5 Mo max.</p>
+      </div>
+
+      <div class="field">
+        <label for="shortDescription">Description courte *</label>
+        <input type="text" id="shortDescription" name="shortDescription" placeholder="Démocratie fondée autour de l'École Normale Supérieure" required maxlength="300">
+      </div>
     </div>
 
-    <div class="field" id="proposerContactField">
-      <label for="proposerContact">Pseudo / contact (facultatif)</label>
-      <input type="text" id="proposerContact" name="proposerContact" placeholder="Pour que l'admin puisse vous recontacter" maxlength="200">
+    <div class="form-section">
+      <h2 class="form-section-title">Informations supplémentaires</h2>
+
+      <div class="field">
+        <label for="longName">Nom long</label>
+        <input type="text" id="longName" name="longName" placeholder="Démocratie Ernestienne Normalienne Supercoole" maxlength="200">
+      </div>
+
+      <div class="field">
+        <label for="coatOfArmsFile">Armoiries (image, facultatif)</label>
+        <div id="currentCoatPreviewWrap"></div>
+        <input type="file" id="coatOfArmsFile" name="coatOfArms" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml">
+      </div>
+
+      <div class="field">
+        <label for="longDescription">Description longue</label>
+        <textarea id="longDescription" name="longDescription" placeholder="Description..." maxlength="5000"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="foundingDate">Date de fondation</label>
+        <input type="text" id="foundingDate" name="foundingDate" placeholder="6 octobre 2025, 2025, ou une datation fictive..." maxlength="100">
+      </div>
+
+      <div class="field">
+        <label for="microcode">Microcode</label>
+        <input type="text" id="microcode" name="microcode" placeholder="ENS" maxlength="5">
+        <p class="field-hint">2 à 5 lettres, converties automatiquement en majuscules, unique parmi toutes les entrées.</p>
+      </div>
+
+      <div class="field">
+        <label for="officialLanguages">Langues officielles</label>
+        <input type="text" id="officialLanguages" name="officialLanguages" placeholder="Ernestien, Français">
+        <p class="field-hint">Séparées par des virgules.</p>
+      </div>
+
+      <div class="field">
+        <label>Liens</label>
+        <div id="linksEditor" class="links-editor"></div>
+        <button type="button" id="addLinkBtn" class="btn btn-secondary btn-small">+ Ajouter un lien</button>
+      </div>
+
+      <div class="field">
+        <label for="recognizedInput">Micronations reconnues</label>
+        <div id="recognizedChips" class="chip-list"></div>
+        <div class="autocomplete-wrap">
+          <input type="text" id="recognizedInput" placeholder="Tapez un nom, choisissez une suggestion ou ajoutez-le tel quel" autocomplete="off">
+          <div id="recognizedSuggestions" class="autocomplete-suggestions" hidden></div>
+        </div>
+        <p class="field-hint">Cliquez une suggestion pour lier une entrée du site, ou appuyez sur Entrée pour ajouter un nom libre.</p>
+      </div>
+
+      <div class="field" id="proposerContactField">
+        <label for="proposerContact">Pseudo / contact (facultatif)</label>
+        <input type="text" id="proposerContact" name="proposerContact" placeholder="Pour que l'admin puisse vous recontacter" maxlength="200">
+      </div>
     </div>
 
     <div class="form-actions">

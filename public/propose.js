@@ -213,10 +213,6 @@
     }
 
     const links = collectLinks();
-    if (!links.length) {
-      showError('Ajoutez au moins un lien valide (Discord, site web...).');
-      return;
-    }
     for (const link of links) {
       try {
         new URL(link.url);

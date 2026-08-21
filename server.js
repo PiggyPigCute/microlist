@@ -185,14 +185,16 @@ function isValidUrl(url) {
   }
 }
 
+// les liens sont facultatifs : toute entrée invalide est silencieusement ignorée plutôt que
+// de bloquer la soumission
 function parseLinks(raw) {
   let links;
   try {
     links = JSON.parse(raw);
   } catch {
-    return null;
+    return [];
   }
-  if (!Array.isArray(links)) return null;
+  if (!Array.isArray(links)) return [];
   const cleaned = [];
   for (const link of links) {
     if (!link || typeof link !== 'object') continue;
@@ -202,7 +204,7 @@ function parseLinks(raw) {
     const label = type === 'Autre' && typeof link.label === 'string' ? link.label.trim().slice(0, 60) : '';
     cleaned.push(label ? { type, label, url } : { type, url });
   }
-  return cleaned.length ? cleaned : null;
+  return cleaned;
 }
 
 const MICROCODE_RE = /^[A-Z]{2,5}$/;
@@ -278,7 +280,6 @@ function buildEntryData(body, files, excludeEntryId) {
   const recognizedMicronations = parseRecognized(body.recognizedMicronations || '[]');
 
   const links = parseLinks(body.links || '[]');
-  if (!links) errors.push('Au moins un lien valide (Discord, site web...) est requis.');
 
   const flagFile = files.flag && files.flag[0];
   const coatFile = files.coatOfArms && files.coatOfArms[0];
@@ -293,7 +294,7 @@ function buildEntryData(body, files, excludeEntryId) {
     data: {
       shortName, longName, shortDescription, longDescription, foundingDate,
       microcode, officialLanguages, recognizedMicronations,
-      links: links || [], flag, coatOfArms,
+      links, flag, coatOfArms,
     },
     newFlagUploaded: Boolean(flagFile),
     newCoatOfArmsUploaded: Boolean(coatFile),
