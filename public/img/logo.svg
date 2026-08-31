@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="36mm"
+   height="36mm"
+   viewBox="0 0 36 36"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   sodipodi:docname="logo"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.69564136"
+     inkscape:cx="117.87683"
+     inkscape:cy="276.72305"
+     inkscape:window-width="1920"
+     inkscape:window-height="1024"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="fill:#ffff00">
+    <g
+       id="g1"
+       transform="translate(-90.533521,-110.93688)">
+      <path
+         sodipodi:type="star"
+         style="fill:#800080;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round"
+         id="path1"
+         inkscape:flatsided="true"
+         sodipodi:sides="5"
+         sodipodi:cx="105.8155"
+         sodipodi:cy="127.23055"
+         sodipodi:r1="20.6154"
+         sodipodi:r2="16.678209"
+         sodipodi:arg1="1.3089969"
+         sodipodi:arg2="1.9373155"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="m 111.15116,147.1435 -22.625191,-8.68499 1.268354,-24.20165 23.409077,-6.27244 13.19925,20.32506 z"
+         inkscape:transform-center-x="-1.3826539"
+         inkscape:transform-center-y="-0.41538938"
+         transform="matrix(0.89838618,-0.11237704,0.11237704,0.89838618,-2.2101066,26.941331)" />
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:24.6944px;line-height:0.9;font-family:BPreplay;-inkscape-font-specification:'BPreplay Bold';letter-spacing:-0.291042px;writing-mode:lr-tb;direction:ltr;fill:#ffff00;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round"
+         x="95.0924"
+         y="135.29597"
+         id="text1"><tspan
+           sodipodi:role="line"
+           id="tspan1"
+           style="fill:#ffff00;stroke-width:2.1"
+           x="95.0924"
+           y="135.29597">µL</tspan></text>
+    </g>
+  </g>
+</svg>
