@@ -4,7 +4,7 @@
 
   try {
     const entry = await api(`/api/entries/${encodeURIComponent(id)}`);
-    document.title = `${entry.shortName} — Microlist`;
+    document.title = `${entry.shortName} — MicroList`;
 
     const linksHtml = entry.links.map(link => `
       <a class="btn btn-secondary" href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">

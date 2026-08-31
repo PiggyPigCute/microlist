@@ -543,5 +543,5 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
-  console.log(`Microlist lancé sur http://localhost:${PORT}`);
+  console.log(`MicroList lancé sur http://localhost:${PORT}`);
 });

@@ -57,7 +57,7 @@ function renderHeader() {
     <div class="header-inner">
       <a class="site-title" href="/">
         <img class="site-logo" src="/img/logo.svg" alt="" width="36" height="36">
-        Microlist
+        MicroList
       </a>
       <nav class="site-nav">
         <a class="btn btn-secondary btn-small" href="/">Accueil</a>
