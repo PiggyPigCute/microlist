@@ -31,10 +31,12 @@
         </div>
       </div>
 
-      <div class="entry-section">
-        <p>${escapeHtml(entry.shortDescription)}</p>
-        ${entry.longDescription ? `<p>${escapeHtml(entry.longDescription).replace(/\n/g, '<br>')}</p>` : ''}
-      </div>
+      ${entry.shortDescription || entry.longDescription ? `
+        <div class="entry-section">
+          ${entry.shortDescription ? `<p>${escapeHtml(entry.shortDescription)}</p>` : ''}
+          ${entry.longDescription ? `<p>${escapeHtml(entry.longDescription).replace(/\n/g, '<br>')}</p>` : ''}
+        </div>
+      ` : ''}
 
       <div class="entry-section entry-links">
         ${linksHtml}

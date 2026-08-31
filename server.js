@@ -256,8 +256,7 @@ function buildEntryData(body, files, excludeEntryId) {
 
   const longName = (body.longName || '').trim().slice(0, 200) || null;
 
-  const shortDescription = (body.shortDescription || '').trim().slice(0, 300);
-  if (!shortDescription) errors.push('La description courte est requise.');
+  const shortDescription = (body.shortDescription || '').trim().slice(0, 300) || null;
 
   const longDescription = (body.longDescription || '').trim().slice(0, 5000) || null;
 

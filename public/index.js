@@ -11,7 +11,7 @@
         <img class="entry-card-flag" src="/uploads/${encodeURIComponent(entry.flag)}" alt="Drapeau de ${escapeHtml(entry.shortName)}">
         <div class="entry-card-body">
           <div class="entry-card-name">${escapeHtml(entry.shortName)}</div>
-          <div class="entry-card-desc">${escapeHtml(entry.shortDescription)}</div>
+          ${entry.shortDescription ? `<div class="entry-card-desc">${escapeHtml(entry.shortDescription)}</div>` : ''}
         </div>
       </a>
     `).join('');
@@ -22,7 +22,7 @@
     const q = searchInput.value.trim().toLowerCase();
     if (!q) return render(entries);
     render(entries.filter(e =>
-      e.shortName.toLowerCase().includes(q) || e.shortDescription.toLowerCase().includes(q)
+      e.shortName.toLowerCase().includes(q) || (e.shortDescription || '').toLowerCase().includes(q)
     ));
   }
 
