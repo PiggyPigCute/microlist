@@ -532,7 +532,7 @@ app.get('/propose', sendPage('propose.html'));
 app.get('/propose/:id', sendPage('propose.html'));
 app.get('/admin/login', sendPage('admin-login.html'));
 app.get('/admin', sendPage('admin.html'));
-app.get('/srm-1-3', sendPage('srm-1-3.html'));
+app.get('/srm', sendPage('srm.html'));
 
 // erreurs multer (fichier trop lourd, format refusé...) et erreurs de parsing JSON
 app.use((err, req, res, next) => {
