@@ -9,7 +9,7 @@
     shortDescription: 'Description courte',
     longDescription: 'Description longue',
     foundingDate: 'Date de fondation',
-    microcode: 'Microcode',
+    microcode: 'Microcode SRM-1-3',
     officialLanguages: 'Langues officielles',
     flag: 'Drapeau',
     coatOfArms: 'Armoiries',

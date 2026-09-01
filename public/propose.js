@@ -207,8 +207,8 @@
     e.preventDefault();
     formMessages.innerHTML = '';
 
-    if (microcodeInput.value && !/^[A-Z]{2,5}$/.test(microcodeInput.value)) {
-      showError('Le microcode doit être composé de 2 à 5 lettres.');
+    if (microcodeInput.value && !/^[A-Z]{3}$/.test(microcodeInput.value)) {
+      showError('Le microcode doit être composé de 3 lettres.');
       return;
     }
 

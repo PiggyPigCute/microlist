@@ -207,7 +207,7 @@ function parseLinks(raw) {
   return cleaned;
 }
 
-const MICROCODE_RE = /^[A-Z]{2,5}$/;
+const MICROCODE_RE = /^[A-Z]{3}$/;
 
 function isMicrocodeTaken(code, excludeEntryId) {
   return entries.some(e => e.id !== excludeEntryId && e.microcode === code);
@@ -267,7 +267,7 @@ function buildEntryData(body, files, excludeEntryId) {
   let microcode = null;
   if (microcodeRaw) {
     if (!MICROCODE_RE.test(microcodeRaw)) {
-      errors.push('Le microcode doit être composé de 2 à 5 lettres.');
+      errors.push('Le microcode doit être composé de 3 lettres.');
     } else if (isMicrocodeTaken(microcodeRaw, excludeEntryId)) {
       errors.push(`Le microcode "${microcodeRaw}" est déjà utilisé par une autre entrée.`);
     } else {
