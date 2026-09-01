@@ -18,12 +18,24 @@
     emptyState.hidden = list.length > 0;
   }
 
+  // priorité de recherche : microcode, puis nom court, puis nom long, puis description ;
+  // -1 = aucune correspondance (exclu des résultats)
+  function matchRank(entry, q) {
+    if ((entry.microcode || '').toLowerCase().includes(q)) return 0;
+    if (entry.shortName.toLowerCase().includes(q)) return 1;
+    if ((entry.longName || '').toLowerCase().includes(q)) return 2;
+    if ((entry.shortDescription || '').toLowerCase().includes(q)) return 3;
+    return -1;
+  }
+
   function applySearch() {
     const q = searchInput.value.trim().toLowerCase();
     if (!q) return render(entries);
-    render(entries.filter(e =>
-      e.shortName.toLowerCase().includes(q) || (e.shortDescription || '').toLowerCase().includes(q)
-    ));
+    const ranked = entries
+      .map(entry => ({ entry, rank: matchRank(entry, q) }))
+      .filter(r => r.rank !== -1)
+      .sort((a, b) => a.rank - b.rank);
+    render(ranked.map(r => r.entry));
   }
 
   searchInput.addEventListener('input', applySearch);

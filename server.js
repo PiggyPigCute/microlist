@@ -348,7 +348,7 @@ app.use(express.static(publicDir));
 
 app.get('/api/entries', (req, res) => {
   const list = entries
-    .map(e => ({ id: e.id, shortName: e.shortName, shortDescription: e.shortDescription, flag: e.flag, microcode: e.microcode }))
+    .map(e => ({ id: e.id, shortName: e.shortName, longName: e.longName, shortDescription: e.shortDescription, flag: e.flag, microcode: e.microcode }))
     .sort((a, b) => a.shortName.localeCompare(b.shortName, 'fr'));
   res.json(list);
 });
