@@ -557,6 +557,13 @@ h1, h2, h3 {
   color: var(--ink);
   font-family: var(--mono);
   vertical-align: middle;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+
+.badge-microcode:hover {
+  background: var(--yellow);
 }
 
 .proposal-meta {
@@ -613,6 +620,32 @@ h1, h2, h3 {
 .admin-entries-table img {
   width: 48px;
   border-radius: .3rem;
+}
+
+/* SRM-1-3 */
+
+.microcode-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.microcode-table th,
+.microcode-table td {
+  text-align: left;
+  padding: .6rem .75rem;
+}
+
+.microcode-table td:last-child {
+  font-family: var(--mono);
+}
+
+.microcode-table tbody tr:nth-child(even) {
+  background: rgba(246, 239, 226, .06);
+}
+
+.microcode-table tbody tr:hover {
+  background: var(--violet-mid);
+  cursor: pointer;
 }
 
 .admin-section {

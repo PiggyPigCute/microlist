@@ -24,7 +24,7 @@
           ${entry.coatOfArms ? `<img class="entry-coat-of-arms" src="/uploads/${encodeURIComponent(entry.coatOfArms)}" alt="Armoiries de ${escapeHtml(entry.shortName)}">` : ''}
         </div>
         <div class="entry-titles">
-          <h1 class="page-title">${escapeHtml(entry.shortName)}${entry.microcode ? ` <span class="badge badge-microcode">${escapeHtml(entry.microcode)}</span>` : ''}</h1>
+          <h1 class="page-title">${escapeHtml(entry.shortName)}${entry.microcode ? ` <a class="badge badge-microcode" href="/srm-1-3">${escapeHtml(entry.microcode)}</a>` : ''}</h1>
           ${entry.longName ? `<p class="entry-long-name">${escapeHtml(entry.longName)}</p>` : ''}
           ${entry.foundingDate ? `<p class="entry-founding">Fondée le ${escapeHtml(entry.foundingDate)}</p>` : ''}
           ${(entry.officialLanguages || []).length ? `<p class="entry-founding">Langues officielles : ${escapeHtml(entry.officialLanguages.join(', '))}</p>` : ''}

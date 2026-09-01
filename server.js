@@ -348,7 +348,7 @@ app.use(express.static(publicDir));
 
 app.get('/api/entries', (req, res) => {
   const list = entries
-    .map(e => ({ id: e.id, shortName: e.shortName, shortDescription: e.shortDescription, flag: e.flag }))
+    .map(e => ({ id: e.id, shortName: e.shortName, shortDescription: e.shortDescription, flag: e.flag, microcode: e.microcode }))
     .sort((a, b) => a.shortName.localeCompare(b.shortName, 'fr'));
   res.json(list);
 });
@@ -532,6 +532,7 @@ app.get('/propose', sendPage('propose.html'));
 app.get('/propose/:id', sendPage('propose.html'));
 app.get('/admin/login', sendPage('admin-login.html'));
 app.get('/admin', sendPage('admin.html'));
+app.get('/srm-1-3', sendPage('srm-1-3.html'));
 
 // erreurs multer (fichier trop lourd, format refusé...) et erreurs de parsing JSON
 app.use((err, req, res, next) => {

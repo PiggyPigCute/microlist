@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registre SRM-1-3 — MicroList</title>
+<link rel="icon" href="/img/logo.svg" type="image/svg+xml">
+<meta name="description" content="Registre des microcodes SRM-1-3 des micronations">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader"></header>
+
+<main class="container">
+  <h1 class="page-title">Registre SRM-1-3</h1>
+  <p class="page-subtitle">Microcodes attribués aux micronations référencées.</p>
+
+  <input type="text" id="searchInput" class="search-bar" placeholder="Rechercher un nom ou un microcode...">
+
+  <table class="microcode-table">
+    <thead>
+      <tr><th>Nom court</th><th>Microcode</th></tr>
+    </thead>
+    <tbody id="microcodeTableBody"></tbody>
+  </table>
+  <p id="emptyState" class="empty-state" hidden>Aucun microcode ne correspond à cette recherche.</p>
+</main>
+
+<script src="/app.js"></script>
+<script src="/srm-1-3.js"></script>
+</body>
+</html>
