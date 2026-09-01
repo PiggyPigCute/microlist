@@ -359,6 +359,26 @@ app.get('/api/entries/:id', (req, res) => {
   res.json(entry);
 });
 
+// lie une micronation reconnue non liée à l'entrée correspondante quand leurs noms
+// correspondent exactement ; pas de validation admin nécessaire, c'est du simple
+// rapprochement de données déjà publiques, ça ne modifie aucun contenu
+app.post('/api/entries/:id/link-recognized', (req, res) => {
+  const entry = entries.find(e => e.id === req.params.id);
+  if (!entry) return res.status(404).json({ error: 'Entrée introuvable.' });
+
+  const targetId = typeof req.body.targetId === 'string' ? req.body.targetId.trim() : '';
+  const target = entries.find(e => e.id === targetId);
+  if (!target) return res.status(404).json({ error: 'Micronation à lier introuvable.' });
+
+  const item = (entry.recognizedMicronations || []).find(m => !m.id && m.name === target.shortName);
+  if (!item) return res.status(400).json({ error: 'Aucune correspondance exacte à lier.' });
+
+  item.id = target.id;
+  entry.updatedAt = new Date().toISOString();
+  saveEntries();
+  res.json(entry);
+});
+
 app.post('/api/proposals', uploadEntryImages, (req, res) => {
   const files = req.files || {};
 
